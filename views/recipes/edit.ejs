@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Recipe</title>
+  </head>
+  <body>
+    <h1>Edit Recipe</h1>
+    <%- include('../partials/_navbar.ejs') %>
+<form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+  <label for="recipeName">Recipe Name:</label>
+  <input type="text" id="recipeName" name="recipeName" value="<%= recipe.recipeName %>" required />
+
+  <label for="instructions">Instructions:</label>
+  <textarea id="instructions" name="instructions" required><%= recipe.instructions %></textarea>
+
+  <label for="ingredients">Ingredients:</label>
+  <select id="ingredients" name="ingredients" multiple>
+    <% ingredients.forEach(ingredient => { %>
+      <option value="<%= ingredient._id %>" <%= recipe.ingredients.includes(ingredient._id) ? 'selected' : '' %>>
+        <%= ingredient.name %>
+      </option>
+    <% }) %>
+  </select>
+
+  <button type="submit">Update Recipe</button>
+</form>
+
+  </body>
+</html>
